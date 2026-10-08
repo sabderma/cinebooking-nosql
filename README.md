@@ -1,4 +1,4 @@
-# CinéBooking — Projet NoSQL
+# CinéBooking — Projet NoSQ
 
 ## 1. Présentation du projet
 
