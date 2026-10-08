@@ -1,4 +1,4 @@
-# CinéBooking — Projet NoSQL test
+# CinéBooking — Projet NoSQL 
 
 ## 1. Présentation du projet
 
