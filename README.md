@@ -1,4 +1,4 @@
-# CinéBooking — Projet NoSQL
+# CinéBooking — Projet NoSQL test
 
 ## 1. Présentation du projet
 
@@ -18,7 +18,7 @@ Le projet est composé de trois services indépendants, chacun ayant ses propres
 - Faire communiquer les services grâce à des événements.
 - Utiliser des données au format JSON.
 
-## 3. Les trois services hh
+## 3. Les trois services
 
 ### Service 1 — Films et séances
 
