@@ -1,1 +1,84 @@
 
+{
+  "service": "AvisEtFidelite",
+  "description": "Gestion des avis, points et recompenses",
+  "regles_fidelite": {
+    "points_film_visionne": 20,
+    "points_avis_publie": 5,
+    "bonus_tous_les_n_films": 5,
+    "bonus_points": 30,
+    "seuil_recompense": 100,
+    "reduction_euros": 5.00,
+    "cumul_avec_tarif_reduit": false,
+    "validite_recompense_jours": 90
+  },
+  "commandes": [
+    {
+      "commande": "AjouterAvis",
+      "donnees": {
+        "id_avis": "AVIS001",
+        "id_client": "CLI001",
+        "id_film": "FILM001",
+        "note": 5,
+        "commentaire": "Excellent film et tres beaux effets visuels"
+      }
+    },
+    {
+      "commande": "ModifierAvis",
+      "donnees": {
+        "id_avis": "AVIS001",
+        "id_client": "CLI001",
+        "note": 4,
+        "commentaire": "Tres bon film mais un peu long"
+      }
+    },
+    {
+      "commande": "SupprimerAvis",
+      "donnees": {
+        "id_avis": "AVIS001",
+        "id_client": "CLI001"
+      }
+    },
+    {
+      "commande": "EchangerPoints",
+      "donnees": {
+        "id_client": "CLI001",
+        "points_a_echanger": 100
+      }
+    },
+    {
+      "commande": "DesactiverRecompense",
+      "donnees": {
+        "id_recompense": "REC001",
+        "motif": "Recompense invalidee"
+      }
+    }
+  ],
+  "requetes": [
+    {
+      "requete": "ConsulterAvisFilm",
+      "donnees": {
+        "id_film": "FILM001"
+      }
+    },
+    {
+      "requete": "ConsulterNoteMoyenne",
+      "donnees": {
+        "id_film": "FILM001"
+      }
+    },
+    {
+      "requete": "ConsulterMesPoints",
+      "donnees": {
+        "id_client": "CLI001"
+      }
+    },
+    {
+      "requete": "ConsulterMesRecompenses",
+      "donnees": {
+        "id_client": "CLI001"
+      }
+    }
+  ]
+}
+
