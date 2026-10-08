@@ -18,7 +18,7 @@ Le projet est composé de trois services indépendants, chacun ayant ses propres
 - Faire communiquer les services grâce à des événements.
 - Utiliser des données au format JSON.
 
-## 3. Les trois services
+## 3. Les trois services hh
 
 ### Service 1 — Films et séances
 
