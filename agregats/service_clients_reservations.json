@@ -1,0 +1,40 @@
+
+{
+  "service": "ClientsEtReservations",
+  "agregats": {
+    "Client": {
+      "id_client": "CLI001",
+      "prenom": "Alex",
+      "nom": "Martin",
+      "email": "alex@example.com",
+      "date_naissance": "2004-05-12",
+      "statut_etudiant": true,
+      "date_creation": "2026-10-10"
+    },
+    "Tarification": {
+      "id_seance": "SEA101",
+      "tarifs": {
+        "normal": 14.00,
+        "moins_26_ans": 10.00,
+        "etudiant": 9.00,
+        "moins_14_ans": 7.00
+      },
+      "devise": "EUR"
+    },
+    "Reservation": {
+      "id_reservation": "RES001",
+      "id_client": "CLI001",
+      "id_seance": "SEA101",
+      "date_reservation": "2026-10-15",
+      "places": ["B5", "B6"],
+      "categorie_tarif": "etudiant",
+      "prix_unitaire": 9.00,
+      "nombre_places": 2,
+      "prix_total": 18.00,
+      "recompense_utilisee": null,
+      "statut": "confirmee",
+      "presence_validee": false
+    }
+  }
+}
+
