@@ -1,0 +1,101 @@
+
+{
+  "service": "ClientsEtReservations",
+  "description": "Gestion des clients, tarifs et reservations",
+  "commandes": [
+    {
+      "commande": "CreerCompteClient",
+      "donnees": {
+        "id_client": "CLI001",
+        "prenom": "Alex",
+        "nom": "Martin",
+        "email": "alex@example.com",
+        "date_naissance": "2004-05-12",
+        "statut_etudiant": true
+      }
+    },
+    {
+      "commande": "ModifierProfilClient",
+      "donnees": {
+        "id_client": "CLI001",
+        "statut_etudiant": false
+      }
+    },
+    {
+      "commande": "DefinirTarifs",
+      "donnees": {
+        "id_seance": "SEA101",
+        "tarifs": {
+          "normal": 14.00,
+          "moins_26_ans": 10.00,
+          "etudiant": 9.00,
+          "moins_14_ans": 7.00
+        }
+      }
+    },
+    {
+      "commande": "CreerReservation",
+      "donnees": {
+        "id_reservation": "RES001",
+        "id_client": "CLI001",
+        "id_seance": "SEA101",
+        "places": ["B5", "B6"],
+        "categorie_tarif": "etudiant",
+        "utiliser_recompense": false
+      }
+    },
+    {
+      "commande": "AnnulerReservation",
+      "donnees": {
+        "id_reservation": "RES001",
+        "id_client": "CLI001",
+        "motif": "Changement de programme"
+      }
+    },
+    {
+      "commande": "ValiderPresence",
+      "donnees": {
+        "id_reservation": "RES001",
+        "id_client": "CLI001",
+        "date_validation": "2026-10-20"
+      }
+    },
+    {
+      "commande": "AppliquerRecompense",
+      "donnees": {
+        "id_reservation": "RES001",
+        "id_client": "CLI001",
+        "id_recompense": "REC001"
+      }
+    }
+  ],
+  "requetes": [
+    {
+      "requete": "ConsulterPlacesDisponibles",
+      "donnees": {
+        "id_seance": "SEA101"
+      }
+    },
+    {
+      "requete": "ConsulterMesReservations",
+      "donnees": {
+        "id_client": "CLI001"
+      }
+    },
+    {
+      "requete": "ConsulterMonProfil",
+      "donnees": {
+        "id_client": "CLI001"
+      }
+    },
+    {
+      "requete": "CalculerPrixReservation",
+      "donnees": {
+        "id_client": "CLI001",
+        "id_seance": "SEA101",
+        "places": ["B5", "B6"]
+      }
+    }
+  ]
+}
+
