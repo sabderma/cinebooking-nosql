@@ -1,6 +1,6 @@
 # CinéBooking — Projet NoSQL 
 
-## 1. Présentation du projet
+## 1. Présentation du projet test
 
 CinéBooking est une application de cinéma qui permet aux utilisateurs de consulter les films disponibles, de réserver des places et de donner leur avis sur les films.
 
