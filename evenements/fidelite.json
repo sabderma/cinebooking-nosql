@@ -8,12 +8,23 @@
       "agregat_modifie": "CompteFidelite",
       "id_agregat": "CLI001",
       "operation": "mise_a_jour",
-      "donnee_modifiee": "solde_points",
-      "ancienne_valeur": 55,
-      "nouvelle_valeur": 75,
-      "details": {
-        "id_reservation": "RES006",
-        "points_ajoutes": 20
+      "donnee_modifiee": [
+        "solde_points",
+        "nombre_films_visionnes",
+        "historique_points"
+      ],
+      "ancienne_valeur": {
+        "solde_points": 55,
+        "nombre_films_visionnes": 5
+      },
+      "nouvelle_valeur": {
+        "solde_points": 75,
+        "nombre_films_visionnes": 6,
+        "historique_points_ajoute": {
+          "type": "film_visionne",
+          "points": 20,
+          "id_reservation": "RES006"
+        }
       }
     }
   ]
