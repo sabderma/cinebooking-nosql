@@ -19,8 +19,8 @@
     "EvaluationFilm": {
       "id_film": "FILM001",
       "titre": "Avatar : La Voie de l'eau",
-      "note_moyenne": 4.6,
-      "nombre_avis": 125
+      "note_moyenne": 5.0,
+      "nombre_avis": 1
     }
   },
   "requete": {

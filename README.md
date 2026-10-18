@@ -1,95 +1,114 @@
 # CinéBooking — Projet NoSQL
 
-## 1. Présentation du projet
+## 1. Présentation
 
-CinéBooking est une application de cinéma qui permet aux utilisateurs de consulter les films disponibles, de réserver des places et de donner leur avis sur les films.
+CinéBooking est une application de cinéma permettant de consulter les films et les séances, de réserver des places, de publier des avis et de bénéficier d'un programme de fidélité.
 
-L’application propose également un programme de fidélité permettant de gagner des points et de les échanger contre des récompenses utilisables lors des réservations.
+L'architecture repose sur trois services métier principaux. Chaque service possède ses propres agrégats et communique avec les autres au moyen d'événements JSON afin de limiter les dépendances directes. À l'étape 6, un service spécialisé de lecture, `StatistiquesFilms`, est ajouté pour construire une projection destinée au classement des films.
 
-Le projet est composé de trois services indépendants, chacun ayant ses propres fonctionnalités et ses propres données.
+## 2. Services métier principaux
 
-## 2. Objectifs du projet
+### `FilmsEtSeances`
 
-- Consulter les films et les horaires des séances.
-- Créer un compte client.
-- Réserver et annuler des places de cinéma.
-- Donner une note et un commentaire sur un film.
-- Consulter les avis des spectateurs.
-- Cumuler des points de fidélité.
-- Échanger des points contre des récompenses.
-- Faire communiquer les services grâce à des événements.
-- Utiliser des données au format JSON.
+Ce service est propriétaire du catalogue et de la programmation.
 
-## 3. Les trois services
+Agrégats :
 
-### Service 1 — Films et séances
+- `Film` : description, réalisation, genres, durée, versions et statut du film ;
+- `Salle` : capacité et équipements d'une salle ;
+- `Seance` : film, salle, date, heure, version, format et statut d'une séance.
 
-Ce service est responsable de la gestion du catalogue des films, des salles et de la programmation des séances.
+Principales commandes : ajouter, modifier ou retirer un film ; créer une salle ; créer, modifier ou annuler une séance.
 
-**Fonctionnalités :**
+### `ClientsEtReservations`
 
-- Ajouter, modifier ou retirer un film.
-- Consulter les films disponibles.
-- Créer et modifier les séances.
-- Annuler une séance.
-- Gérer les salles et les horaires.
+Ce service est propriétaire des comptes clients, des tarifs et des réservations.
 
-**Exemple :**
+Agrégats :
 
-Le film Avatar est programmé dans la salle 2 à 20 h.
+- `Client` : profil du client ;
+- `Tarification` : tarifs applicables à une séance ;
+- `Reservation` : places réservées, prix appliqués et statut de la réservation ;
+- `SeanceReservable` : réplica des informations de séance nécessaires à une réservation.
 
-### Service 2 — Clients et réservations
+Principales commandes : créer ou modifier un compte, définir les tarifs, créer ou annuler une réservation, valider une présence et appliquer une récompense.
 
-Ce service est responsable de la gestion des comptes clients, des tarifs, des places et des réservations.
+### `AvisEtFidelite`
 
-**Fonctionnalités :**
+Ce service est propriétaire des avis, des comptes de fidélité et des récompenses.
 
-- Créer et modifier un compte client.
-- Définir les tarifs d’une séance.
-- Consulter les places disponibles.
-- Réserver une ou plusieurs places.
-- Annuler une réservation.
-- Consulter les réservations effectuées.
-- Calculer le prix d’une réservation.
-- Appliquer une récompense à une réservation.
-- Valider la présence d’un client à une séance.
+Agrégats :
 
-**Exemple :**
+- `Avis` : note et commentaire publiés par un client ;
+- `CompteFidelite` : solde, compteurs et historique des points ;
+- `Recompense` : réduction obtenue en échange de points ;
+- `FilmAvisable` : réplica minimal d'un film pouvant recevoir des avis.
 
-Un client réserve les places B5 et B6 pour une séance du film Avatar en utilisant le tarif étudiant.
+Principales commandes : ajouter, modifier ou supprimer un avis, échanger des points et désactiver une récompense.
 
-### Service 3 — Avis et fidélité
+## 3. Données répliquées
 
-Ce service est responsable de la gestion des avis des spectateurs, des points de fidélité et des récompenses.
+Deux réplicas permettent aux services consommateurs de travailler sans interroger directement `FilmsEtSeances` :
 
-**Fonctionnalités :**
+- `SeanceReservable`, stocké dans `ClientsEtReservations`, reprend l'identifiant de la séance, le film, la salle, la capacité, la date, l'heure, la version, le format et le statut ;
+- `FilmAvisable`, stocké dans `AvisEtFidelite`, reprend l'identifiant, le titre et le statut du film.
 
-- Ajouter, modifier ou supprimer un avis.
-- Donner une note et un commentaire sur un film.
-- Consulter les avis des spectateurs.
-- Calculer la note moyenne d’un film.
-- Cumuler des points après avoir visionné un film ou publié un avis.
-- Échanger des points contre une récompense.
-- Consulter ses points et ses récompenses.
-- Désactiver une récompense si nécessaire.
+Chaque réplica indique explicitement `type_donnee: "replica"` et son `service_source`.
 
-**Exemple :**
+## 4. Communication par événements
 
-Un spectateur donne une note de 4 sur 5 au film Avatar et ajoute un commentaire. Après plusieurs séances et avis publiés, il échange 100 points contre une récompense de 5 euros.
+Les services sont découplés grâce à six événements JSON :
 
-## 4. Architecture du projet
+| Événement | Émetteur | Récepteur | Rôle |
+|---|---|---|---|
+| `SeancePubliee` | `FilmsEtSeances` | `ClientsEtReservations` | Crée le réplica `SeanceReservable`. |
+| `SeanceModifiee` | `FilmsEtSeances` | `ClientsEtReservations` | Met à jour l'heure du réplica. |
+| `SeanceAnnulee` | `FilmsEtSeances` | `ClientsEtReservations` | Passe le statut du réplica à `annulee`. |
+| `FilmPublie` | `FilmsEtSeances` | `AvisEtFidelite` | Crée le réplica `FilmAvisable`. |
+| `FilmModifie` | `FilmsEtSeances` | `AvisEtFidelite` | Met à jour le statut du réplica. |
+| `PresenceValidee` | `ClientsEtReservations` | `AvisEtFidelite` | Ajoute les points du film visionné au `CompteFidelite`, incrémente le compteur et complète l'historique. |
 
-L’application est composée de trois services indépendants.
+Chaque événement précise le service émetteur, le service récepteur, l'agrégat et la donnée modifiés ainsi que la nouvelle valeur. Les événements `SeancePubliee`/`SeanceModifiee` et `FilmPublie`/`FilmModifie` montrent respectivement la création puis la mise à jour d'un réplica.
 
-Chaque service possède ses propres données et gère ses propres fonctionnalités.
+## 5. Projection `StatistiquesFilms`
 
-Les services communiquent grâce à des événements JSON afin de transmettre les informations nécessaires tout en restant découplés.
+Le service spécialisé `StatistiquesFilms` construit l'agrégat de lecture `EvaluationFilm` à partir de `FilmAvisable` et des avis publiés par `AvisEtFidelite`.
 
-Cette organisation permet de limiter les dépendances entre les services, d’améliorer leur autonomie et de faciliter leur évolution.
+Pour chaque film, la projection calcule :
 
-## 5. Technologies envisagées
+- le nombre total d'avis publiés ;
+- la note moyenne, selon la formule `somme des notes / nombre d'avis`.
 
-- JSON : représentation des commandes, agrégats et événements.
-- NoSQL : stockage des données.
-- GitHub : gestion et partage du projet.
-- Architecture événementielle : communication entre les services.
+L'exemple fourni contient un avis noté 5 : la projection reproductible possède donc `note_moyenne: 5.0` et `nombre_avis: 1`.
+
+La requête `ConsulterFilmsLesMieuxNotes` sélectionne les films dont la note moyenne est au moins égale à 4, les trie par note décroissante et limite le résultat aux dix premiers.
+
+## 6. Structure du dépôt
+
+```text
+.
+├── README.md
+├── commandes/
+│   ├── service_films_seances.json
+│   ├── service_clients_reservations.json
+│   └── service_avis_fidelite.json
+├── agregats/
+│   ├── service_films_seances.json
+│   ├── service_clients_reservations.json
+│   └── service_avis_fidelite.json
+├── evenements/
+│   ├── seance_reservable.json
+│   ├── film_avisable.json
+│   └── fidelite.json
+└── projections/
+    └── service_statistiques_films.json
+```
+
+## 7. Technologies et principes
+
+- JSON pour représenter les commandes, agrégats, réplicas, événements et projections ;
+- stockage NoSQL orienté agrégats ;
+- architecture événementielle pour la communication asynchrone entre services ;
+- réplication contrôlée des seules données nécessaires à chaque service ;
+- projection en modèle de lecture pour répondre efficacement à une requête spécialisée ;
+- Git et GitHub pour le travail collaboratif et le suivi des versions.
