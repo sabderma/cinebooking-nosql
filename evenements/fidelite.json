@@ -1,1 +1,20 @@
-
+{
+  "description": "Attribution de points apres validation de la presence",
+  "evenements": [
+    {
+      "evenement": "PresenceValidee",
+      "service_emetteur": "ClientsEtReservations",
+      "service_recepteur": "AvisEtFidelite",
+      "agregat_modifie": "CompteFidelite",
+      "id_agregat": "CLI001",
+      "operation": "mise_a_jour",
+      "donnee_modifiee": "solde_points",
+      "ancienne_valeur": 55,
+      "nouvelle_valeur": 75,
+      "details": {
+        "id_reservation": "RES006",
+        "points_ajoutes": 20
+      }
+    }
+  ]
+}
