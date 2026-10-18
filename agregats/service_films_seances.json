@@ -1,4 +1,3 @@
-
 {
   "service": "FilmsEtSeances",
   "agregats": {
@@ -7,12 +6,21 @@
       "titre": "Avatar : La Voie de l'eau",
       "description": "Jake Sully et sa famille doivent affronter de nouveaux dangers sur Pandora.",
       "realisateur": "James Cameron",
-      "pays": ["Etats-Unis"],
+      "pays": [
+        "Etats-Unis"
+      ],
       "annee_sortie": 2022,
-      "genres": ["Science-fiction", "Aventure"],
+      "genres": [
+        "Science-fiction",
+        "Aventure"
+      ],
       "duree_minutes": 192,
       "langue_originale": "Anglais",
-      "versions_disponibles": ["VF", "VO", "VOSTFR"],
+      "versions_disponibles": [
+        "VF",
+        "VO",
+        "VOSTFR"
+      ],
       "acteurs": [
         "Sam Worthington",
         "Zoe Saldana",
@@ -28,7 +36,10 @@
       "nombre_rangees": 6,
       "places_par_rangee": 10,
       "nombre_places": 60,
-      "equipements": ["3D", "Dolby Atmos"]
+      "equipements": [
+        "3D",
+        "Dolby Atmos"
+      ]
     },
     "Seance": {
       "id_seance": "SEA101",
@@ -38,9 +49,7 @@
       "heure_debut": "20:00",
       "version": "VOSTFR",
       "format": "3D",
-      "prix_normal": 14.00,
       "statut": "programmee"
     }
   }
 }
-
