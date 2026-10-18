@@ -1,55 +1,113 @@
 {
   "service": "FilmsEtSeances",
-  "agregats": {
-    "Film": {
-      "id_film": "FILM001",
-      "titre": "Avatar : La Voie de l'eau",
-      "description": "Jake Sully et sa famille doivent affronter de nouveaux dangers sur Pandora.",
-      "realisateur": "James Cameron",
-      "pays": [
-        "Etats-Unis"
-      ],
-      "annee_sortie": 2022,
-      "genres": [
-        "Science-fiction",
-        "Aventure"
-      ],
-      "duree_minutes": 192,
-      "langue_originale": "Anglais",
-      "versions_disponibles": [
-        "VF",
-        "VO",
-        "VOSTFR"
-      ],
-      "acteurs": [
-        "Sam Worthington",
-        "Zoe Saldana",
-        "Sigourney Weaver"
-      ],
-      "age_minimum": 12,
-      "affiche_url": "https://exemple.com/avatar.jpg",
-      "statut": "a_l_affiche"
+  "description": "Gestion des films, salles et seances",
+  "commandes": [
+    {
+      "commande": "AjouterFilm",
+      "donnees": {
+        "id_film": "FILM001",
+        "titre": "Avatar : La Voie de l'eau",
+        "description": "Jake Sully et sa famille doivent affronter de nouveaux dangers sur Pandora.",
+        "realisateur": "James Cameron",
+        "pays": [
+          "Etats-Unis"
+        ],
+        "annee_sortie": 2022,
+        "genres": [
+          "Science-fiction",
+          "Aventure"
+        ],
+        "duree_minutes": 192,
+        "langue_originale": "Anglais",
+        "versions_disponibles": [
+          "VF",
+          "VO",
+          "VOSTFR"
+        ],
+        "acteurs": [
+          "Sam Worthington",
+          "Zoe Saldana",
+          "Sigourney Weaver"
+        ],
+        "age_minimum": 12,
+        "affiche_url": "https://exemple.com/avatar.jpg",
+        "statut": "a_l_affiche"
+      }
     },
-    "Salle": {
-      "id_salle": "SALLE02",
-      "nom": "Salle 2",
-      "nombre_rangees": 6,
-      "places_par_rangee": 10,
-      "nombre_places": 60,
-      "equipements": [
-        "3D",
-        "Dolby Atmos"
-      ]
+    {
+      "commande": "ModifierFilm",
+      "donnees": {
+        "id_film": "FILM001",
+        "description": "Nouvelle description du film"
+      }
     },
-    "Seance": {
-      "id_seance": "SEA101",
-      "id_film": "FILM001",
-      "id_salle": "SALLE02",
-      "date": "2026-10-20",
-      "heure_debut": "20:00",
-      "version": "VOSTFR",
-      "format": "3D",
-      "statut": "programmee"
+    {
+      "commande": "RetirerFilm",
+      "donnees": {
+        "id_film": "FILM001"
+      }
+    },
+    {
+      "commande": "CreerSalle",
+      "donnees": {
+        "id_salle": "SALLE02",
+        "nom": "Salle 2",
+        "nombre_rangees": 6,
+        "places_par_rangee": 10,
+        "nombre_places": 60,
+        "equipements": [
+          "3D",
+          "Dolby Atmos"
+        ]
+      }
+    },
+    {
+      "commande": "CreerSeance",
+      "donnees": {
+        "id_seance": "SEA101",
+        "id_film": "FILM001",
+        "id_salle": "SALLE02",
+        "date": "2026-10-20",
+        "heure_debut": "20:00",
+        "version": "VOSTFR",
+        "format": "3D"
+      }
+    },
+    {
+      "commande": "ModifierSeance",
+      "donnees": {
+        "id_seance": "SEA101",
+        "heure_debut": "20:30"
+      }
+    },
+    {
+      "commande": "AnnulerSeance",
+      "donnees": {
+        "id_seance": "SEA101",
+        "motif": "Probleme technique"
+      }
     }
-  }
+  ],
+  "requetes": [
+    {
+      "requete": "ConsulterFilms",
+      "donnees": {
+        "statut": "a_l_affiche"
+      }
+    },
+    {
+      "requete": "ConsulterDetailsFilm",
+      "donnees": {
+        "id_film": "FILM001"
+      }
+    },
+    {
+      "requete": "ConsulterSeances",
+      "donnees": {
+        "id_film": "FILM001",
+        "date": "2026-10-20",
+        "version": "VOSTFR"
+      }
+    }
+  ]
 }
