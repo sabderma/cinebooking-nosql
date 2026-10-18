@@ -1,4 +1,3 @@
-
 {
   "service": "ClientsEtReservations",
   "agregats": {
@@ -21,12 +20,34 @@
       },
       "devise": "EUR"
     },
+    "SeanceReservable": {
+      "type_donnee": "replica",
+      "service_source": "FilmsEtSeances",
+      "id_seance": "SEA101",
+      "film": {
+        "id_film": "FILM001",
+        "titre": "Avatar : La Voie de l'eau"
+      },
+      "salle": {
+        "id_salle": "SALLE02",
+        "nom": "Salle 2",
+        "nombre_places": 60
+      },
+      "date": "2026-10-20",
+      "heure_debut": "20:00",
+      "version": "VOSTFR",
+      "format": "3D",
+      "statut": "programmee"
+    },
     "Reservation": {
       "id_reservation": "RES001",
       "id_client": "CLI001",
       "id_seance": "SEA101",
       "date_reservation": "2026-10-15",
-      "places": ["B5", "B6"],
+      "places": [
+        "B5",
+        "B6"
+      ],
       "categorie_tarif": "etudiant",
       "prix_unitaire": 9.00,
       "nombre_places": 2,
@@ -37,4 +58,3 @@
     }
   }
 }
-
