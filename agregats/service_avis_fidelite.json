@@ -28,21 +28,48 @@
           "id_avis": "AVIS001"
         },
         {
+          "type": "film_visionne",
+          "points": 20,
+          "id_reservation": "RES002"
+        },
+        {
+          "type": "avis_publie",
+          "points": 5,
+          "id_avis": "AVIS002"
+        },
+        {
+          "type": "film_visionne",
+          "points": 20,
+          "id_reservation": "RES003"
+        },
+        {
+          "type": "avis_publie",
+          "points": 5,
+          "id_avis": "AVIS003"
+        },
+        {
+          "type": "film_visionne",
+          "points": 20,
+          "id_reservation": "RES004"
+        },
+        {
+          "type": "avis_publie",
+          "points": 5,
+          "id_avis": "AVIS004"
+        },
+        {
+          "type": "film_visionne",
+          "points": 20,
+          "id_reservation": "RES005"
+        },
+        {
+          "type": "avis_publie",
+          "points": 5,
+          "id_avis": "AVIS005"
+        },
+        {
           "type": "bonus_5_films",
           "points": 30
         }
       ]
-    },
-    "Recompense": {
-      "id_recompense": "REC001",
-      "id_client": "CLI001",
-      "type": "reduction",
-      "reduction_euros": 5.00,
-      "points_utilises": 100,
-      "date_creation": "2026-10-21",
-      "date_expiration": "2027-01-19",
-      "statut": "disponible"
     }
-  }
-}
-
