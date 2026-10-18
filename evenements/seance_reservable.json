@@ -1,5 +1,5 @@
 {
-  "description": "Evenements permettant de synchroniser le replica SeanceReservable",
+  "description": "Synchronisation du replica SeanceReservable",
   "evenements": [
     {
       "evenement": "SeancePubliee",
@@ -35,6 +35,16 @@
       "operation": "mise_a_jour",
       "donnee_modifiee": "heure_debut",
       "nouvelle_valeur": "20:30"
+    },
+    {
+      "evenement": "SeanceAnnulee",
+      "service_emetteur": "FilmsEtSeances",
+      "service_recepteur": "ClientsEtReservations",
+      "agregat_modifie": "SeanceReservable",
+      "id_agregat": "SEA101",
+      "operation": "mise_a_jour",
+      "donnee_modifiee": "statut",
+      "nouvelle_valeur": "annulee"
     }
   ]
 }
