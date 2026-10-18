@@ -19,7 +19,7 @@
     },
     "CompteFidelite": {
       "id_client": "CLI001",
-      "solde_points": 155,
+      "solde_points": 55,
       "nombre_films_visionnes": 5,
       "nombre_avis_publies": 5,
       "historique_points": [
@@ -76,6 +76,11 @@
         {
           "type": "bonus_5_films",
           "points": 30
+        },
+        {
+          "type": "recompense_echangee",
+          "points": -100,
+          "id_recompense": "REC001"
         }
       ]
     },
