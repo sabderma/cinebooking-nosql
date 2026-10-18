@@ -1,1 +1,40 @@
-
+{
+  "description": "Evenements permettant de synchroniser le replica SeanceReservable",
+  "evenements": [
+    {
+      "evenement": "SeancePubliee",
+      "service_emetteur": "FilmsEtSeances",
+      "service_recepteur": "ClientsEtReservations",
+      "agregat_modifie": "SeanceReservable",
+      "operation": "creation",
+      "donnee_modifiee": "SeanceReservable",
+      "nouvelle_valeur": {
+        "id_seance": "SEA101",
+        "film": {
+          "id_film": "FILM001",
+          "titre": "Avatar : La Voie de l'eau"
+        },
+        "salle": {
+          "id_salle": "SALLE02",
+          "nom": "Salle 2",
+          "nombre_places": 60
+        },
+        "date": "2026-10-20",
+        "heure_debut": "20:00",
+        "version": "VOSTFR",
+        "format": "3D",
+        "statut": "programmee"
+      }
+    },
+    {
+      "evenement": "SeanceModifiee",
+      "service_emetteur": "FilmsEtSeances",
+      "service_recepteur": "ClientsEtReservations",
+      "agregat_modifie": "SeanceReservable",
+      "id_agregat": "SEA101",
+      "operation": "mise_a_jour",
+      "donnee_modifiee": "heure_debut",
+      "nouvelle_valeur": "20:30"
+    }
+  ]
+}
