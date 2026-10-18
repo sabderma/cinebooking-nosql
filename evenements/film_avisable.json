@@ -1,1 +1,28 @@
-
+{
+  "description": "Synchronisation du replica FilmAvisable",
+  "evenements": [
+    {
+      "evenement": "FilmPublie",
+      "service_emetteur": "FilmsEtSeances",
+      "service_recepteur": "AvisEtFidelite",
+      "agregat_modifie": "FilmAvisable",
+      "operation": "creation",
+      "donnee_modifiee": "FilmAvisable",
+      "nouvelle_valeur": {
+        "id_film": "FILM001",
+        "titre": "Avatar : La Voie de l'eau",
+        "statut": "a_l_affiche"
+      }
+    },
+    {
+      "evenement": "FilmModifie",
+      "service_emetteur": "FilmsEtSeances",
+      "service_recepteur": "AvisEtFidelite",
+      "agregat_modifie": "FilmAvisable",
+      "id_agregat": "FILM001",
+      "operation": "mise_a_jour",
+      "donnee_modifiee": "statut",
+      "nouvelle_valeur": "retire"
+    }
+  ]
+}
