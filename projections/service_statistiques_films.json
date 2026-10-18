@@ -1,1 +1,37 @@
-
+{
+  "service": "StatistiquesFilms",
+  "description": "Projection des films et des avis pour faciliter la consultation des films les mieux notes",
+  "sources": [
+    {
+      "service": "AvisEtFidelite",
+      "agregat": "FilmAvisable"
+    },
+    {
+      "service": "AvisEtFidelite",
+      "agregat": "Avis"
+    }
+  ],
+  "regles_transformation": {
+    "note_moyenne": "somme des notes divisee par le nombre d'avis",
+    "nombre_avis": "nombre total d'avis publies pour le film"
+  },
+  "agregat_projete": {
+    "EvaluationFilm": {
+      "id_film": "FILM001",
+      "titre": "Avatar : La Voie de l'eau",
+      "note_moyenne": 4.6,
+      "nombre_avis": 125
+    }
+  },
+  "requete": {
+    "nom": "ConsulterFilmsLesMieuxNotes",
+    "filtres": {
+      "note_minimale": 4.0
+    },
+    "tri": {
+      "champ": "note_moyenne",
+      "ordre": "decroissant"
+    },
+    "limite": 10
+  }
+}
