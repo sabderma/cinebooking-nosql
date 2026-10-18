@@ -1,7 +1,13 @@
-
 {
   "service": "AvisEtFidelite",
   "agregats": {
+    "FilmAvisable": {
+      "type_donnee": "replica",
+      "service_source": "FilmsEtSeances",
+      "id_film": "FILM001",
+      "titre": "Avatar : La Voie de l'eau",
+      "statut": "a_l_affiche"
+    },
     "Avis": {
       "id_avis": "AVIS001",
       "id_client": "CLI001",
@@ -72,4 +78,16 @@
           "points": 30
         }
       ]
+    },
+    "Recompense": {
+      "id_recompense": "REC001",
+      "id_client": "CLI001",
+      "type": "reduction",
+      "reduction_euros": 5.00,
+      "points_utilises": 100,
+      "date_creation": "2026-10-21",
+      "date_expiration": "2027-01-19",
+      "statut": "disponible"
     }
+  }
+}
