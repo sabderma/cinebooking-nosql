@@ -112,5 +112,3 @@ La requête `ConsulterFilmsLesMieuxNotes` sélectionne les films dont la note mo
 - réplication contrôlée des seules données nécessaires à chaque service ;
 - projection en modèle de lecture pour répondre efficacement à une requête spécialisée ;
 - Git et GitHub pour le travail collaboratif et le suivi des versions.
-
-Test de soumission GitHub par Houssem.
