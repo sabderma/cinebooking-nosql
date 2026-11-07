@@ -1,1 +1,51 @@
-
+{
+  "description": "Synchronisation des recompenses entre AvisEtFidelite (proprietaire) et ClientsEtReservations (qui applique la reduction)",
+  "evenements": [
+    {
+      "evenement": "RecompenseCreee",
+      "id_evenement": "EVT-REC-001",
+      "date_emission": "2026-10-21T10:00:00Z",
+      "service_emetteur": "AvisEtFidelite",
+      "service_recepteur": "ClientsEtReservations",
+      "agregat_modifie": "RecompenseUtilisable",
+      "id_agregat": "REC001",
+      "operation": "creation",
+      "donnee_modifiee": "RecompenseUtilisable",
+      "nouvelle_valeur": {
+        "id_recompense": "REC001",
+        "id_client": "CLI001",
+        "reduction_euros": 5.00,
+        "date_expiration": "2027-01-19",
+        "statut": "disponible"
+      }
+    },
+    {
+      "evenement": "RecompenseDesactivee",
+      "id_evenement": "EVT-REC-002",
+      "date_emission": "2026-11-02T09:00:00Z",
+      "service_emetteur": "AvisEtFidelite",
+      "service_recepteur": "ClientsEtReservations",
+      "agregat_modifie": "RecompenseUtilisable",
+      "id_agregat": "REC001",
+      "operation": "mise_a_jour",
+      "donnee_modifiee": "statut",
+      "nouvelle_valeur": "desactivee"
+    },
+    {
+      "evenement": "RecompenseUtilisee",
+      "id_evenement": "EVT-REC-003",
+      "date_emission": "2026-10-25T18:00:00Z",
+      "service_emetteur": "ClientsEtReservations",
+      "service_recepteur": "AvisEtFidelite",
+      "agregat_modifie": "Recompense",
+      "id_agregat": "REC001",
+      "operation": "mise_a_jour",
+      "donnee_modifiee": "statut",
+      "nouvelle_valeur": "utilisee",
+      "contexte": {
+        "id_client": "CLI001",
+        "id_reservation": "RES007"
+      }
+    }
+  ]
+}
