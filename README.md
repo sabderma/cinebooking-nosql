@@ -64,10 +64,16 @@ Les services sont découplés grâce à six événements JSON :
 | `SeancePubliee` | `FilmsEtSeances` | `ClientsEtReservations` | Crée le réplica `SeanceReservable`. |
 | `SeanceModifiee` | `FilmsEtSeances` | `ClientsEtReservations` | Met à jour l'heure du réplica. |
 | `SeanceAnnulee` | `FilmsEtSeances` | `ClientsEtReservations` | Passe le statut du réplica à `annulee`. |
+| `FilmRenomme` | `FilmsEtSeances` | `ClientsEtReservations` et `AvisEtFidelite` | Met à jour le titre copié dans `SeanceReservable` et `FilmAvisable`. |
 | `FilmPublie` | `FilmsEtSeances` | `AvisEtFidelite` | Crée le réplica `FilmAvisable`. |
-| `FilmModifie` | `FilmsEtSeances` | `AvisEtFidelite` | Met à jour le statut du réplica. |
-| `PresenceValidee` | `ClientsEtReservations` | `AvisEtFidelite` | Ajoute les points du film visionné au `CompteFidelite`, incrémente le compteur et complète l'historique. |
+| `FilmRetire` | `FilmsEtSeances` | `AvisEtFidelite` | Passe le statut du réplica à `retire`. |
+| `PresenceValidee` | `ClientsEtReservations` | `AvisEtFidelite` | Annonce qu'un client a vu un film ; `AvisEtFidelite` calcule lui-même les points. |
+| `RecompenseCreee` | `AvisEtFidelite` | `ClientsEtReservations` | Crée le réplica `RecompenseUtilisable`. |
+| `RecompenseDesactivee` | `AvisEtFidelite` | `ClientsEtReservations` | Passe le statut du réplica à `desactivee`. |
+| `RecompenseUtilisee` | `ClientsEtReservations` | `AvisEtFidelite` | Marque la récompense comme utilisée. |
+| `AvisPublie` / `AvisModifie` / `AvisSupprime` | `AvisEtFidelite` | `StatistiquesFilms` | Mettent à jour la projection `EvaluationFilm`. |
 
+Chaque événement possède un `id_evenement` unique et une `date_emission`.
 Chaque événement précise le service émetteur, le service récepteur, l'agrégat et la donnée modifiés ainsi que la nouvelle valeur. Les événements `SeancePubliee`/`SeanceModifiee` et `FilmPublie`/`FilmModifie` montrent respectivement la création puis la mise à jour d'un réplica.
 
 ## 5. Projection `StatistiquesFilms`
