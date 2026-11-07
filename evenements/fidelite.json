@@ -1,30 +1,24 @@
 {
-  "description": "Attribution de points apres validation de la presence",
+  "description": "Le service ClientsEtReservations annonce qu'un client a vu un film. AvisEtFidelite calcule lui-meme les points avec ses propres regles.",
   "evenements": [
     {
       "evenement": "PresenceValidee",
+      "id_evenement": "EVT-FID-001",
+      "date_emission": "2026-10-20T22:45:00Z",
       "service_emetteur": "ClientsEtReservations",
       "service_recepteur": "AvisEtFidelite",
-      "agregat_modifie": "CompteFidelite",
-      "id_agregat": "CLI001",
+      "agregat_modifie": "Reservation",
+      "id_agregat": "RES006",
       "operation": "mise_a_jour",
-      "donnee_modifiee": [
-        "solde_points",
-        "nombre_films_visionnes",
-        "historique_points"
-      ],
-      "ancienne_valeur": {
-        "solde_points": 55,
-        "nombre_films_visionnes": 5
+      "donnee_modifiee": "presence_validee",
+      "nouvelle_valeur": true,
+      "contexte": {
+        "id_client": "CLI001",
+        "id_film": "FILM001"
       },
-      "nouvelle_valeur": {
-        "solde_points": 75,
-        "nombre_films_visionnes": 6,
-        "historique_points_ajoute": {
-          "type": "film_visionne",
-          "points": 20,
-          "id_reservation": "RES006"
-        }
+      "reaction_recepteur": {
+        "agregat_impacte": "CompteFidelite",
+        "regle_appliquee": "points_film_visionne (+20) et bonus_points (+30) tous les 5 films"
       }
     }
   ]
