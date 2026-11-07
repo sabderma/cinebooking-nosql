@@ -110,10 +110,16 @@ La requête `ConsulterFilmsLesMieuxNotes` sélectionne les films dont la note mo
 
 ## 6. Stockage NoSQL
 
-Le projet utilise deux bases NoSQL complémentaires :
+Le projet utilise deux bases NoSQL, chacune avec un rôle précis :
 
-- **Redis** (étape 7) : stockage des agrégats de chaque service sous forme de clés préfixées par le nom du service, et transport des événements entre services avec Redis Streams. La projection `EvaluationFilm` utilise un ensemble trié (sorted set) pour obtenir directement le classement des films.
-- **MongoDB** : stockage durable des agrégats sous forme de documents JSON, avec une base par service, ce qui permet de faire des requêtes riches (par exemple filtrer les séances par film, date et version).
+- **MongoDB** stocke les agrégats. Chaque service possède sa propre base (`films_db`, `reservations_db`, `avis_db`, `statistiques_db`) et n'accède jamais à celle d'un autre service. Les réplicas et la projection `EvaluationFilm` sont aussi stockés dans MongoDB, dans la base du service qui les utilise.
+- **Redis** sert uniquement à la communication entre services : chaque événement est publié dans Redis sous forme clé-valeur, puis lu par le service récepteur.
+
+Exemple avec le retrait d'un film :
+
+1. `FilmsEtSeances` reçoit la commande `RetirerFilm` et met à jour le `Film` dans `films_db` ;
+2. `FilmsEtSeances` publie l'événement `FilmRetire` dans Redis ;
+3. `AvisEtFidelite` lit l'événement et met à jour son réplica `FilmAvisable` dans `avis_db`.
 
 ## 7. Structure du dépôt
 
@@ -142,8 +148,8 @@ Le projet utilise deux bases NoSQL complémentaires :
 
 - JSON pour représenter les commandes, agrégats, réplicas, événements et projections ;
 - Python et FastAPI pour implémenter chaque service ;
-- Redis pour les agrégats, les événements (Redis Streams) et le classement des films ;
-- MongoDB pour le stockage documentaire durable des agrégats ;
+- MongoDB pour stocker les agrégats, les réplicas et la projection (une base par service) ;
+- Redis pour publier et lire les événements entre services ;
 - architecture événementielle pour la communication asynchrone entre services ;
 - réplication contrôlée des seules données nécessaires à chaque service ;
 - projection en modèle de lecture pour répondre efficacement à une requête spécialisée ;
