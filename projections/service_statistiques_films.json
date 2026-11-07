@@ -1,26 +1,34 @@
 {
   "service": "StatistiquesFilms",
-  "description": "Projection des films et des avis pour faciliter la consultation des films les mieux notes",
-  "sources": [
+  "description": "Projection des avis pour consulter rapidement les films les mieux notes",
+  "evenements_recus": [
     {
-      "service": "AvisEtFidelite",
-      "agregat": "FilmAvisable"
+      "evenement": "AvisPublie",
+      "service_emetteur": "AvisEtFidelite",
+      "effet": "somme_notes += note ; nombre_avis += 1"
     },
     {
-      "service": "AvisEtFidelite",
-      "agregat": "Avis"
+      "evenement": "AvisModifie",
+      "service_emetteur": "AvisEtFidelite",
+      "effet": "somme_notes += nouvelle note - ancienne note"
+    },
+    {
+      "evenement": "AvisSupprime",
+      "service_emetteur": "AvisEtFidelite",
+      "effet": "somme_notes -= note ; nombre_avis -= 1"
     }
   ],
   "regles_transformation": {
-    "note_moyenne": "somme des notes divisee par le nombre d'avis",
+    "note_moyenne": "somme_notes / nombre_avis (0 si aucun avis)",
     "nombre_avis": "nombre total d'avis publies pour le film"
   },
   "agregat_projete": {
     "EvaluationFilm": {
       "id_film": "FILM001",
       "titre": "Avatar : La Voie de l'eau",
-      "note_moyenne": 5.0,
-      "nombre_avis": 1
+      "somme_notes": 5,
+      "nombre_avis": 1,
+      "note_moyenne": 5.0
     }
   },
   "requete": {
