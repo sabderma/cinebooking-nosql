@@ -1,1 +1,56 @@
-
+{
+  "description": "Alimentation de la projection EvaluationFilm du service StatistiquesFilms",
+  "evenements": [
+    {
+      "evenement": "AvisPublie",
+      "id_evenement": "EVT-STAT-001",
+      "date_emission": "2026-10-21T09:00:00Z",
+      "service_emetteur": "AvisEtFidelite",
+      "service_recepteur": "StatistiquesFilms",
+      "agregat_modifie": "EvaluationFilm",
+      "id_agregat": "FILM001",
+      "operation": "mise_a_jour",
+      "donnee_modifiee": ["somme_notes", "nombre_avis", "note_moyenne"],
+      "nouvelle_valeur": {
+        "id_avis": "AVIS001",
+        "id_film": "FILM001",
+        "titre": "Avatar : La Voie de l'eau",
+        "note": 5
+      }
+    },
+    {
+      "evenement": "AvisModifie",
+      "id_evenement": "EVT-STAT-002",
+      "date_emission": "2026-10-22T09:00:00Z",
+      "service_emetteur": "AvisEtFidelite",
+      "service_recepteur": "StatistiquesFilms",
+      "agregat_modifie": "EvaluationFilm",
+      "id_agregat": "FILM001",
+      "operation": "mise_a_jour",
+      "donnee_modifiee": ["somme_notes", "note_moyenne"],
+      "ancienne_valeur": {
+        "note": 5
+      },
+      "nouvelle_valeur": {
+        "id_avis": "AVIS001",
+        "note": 4
+      }
+    },
+    {
+      "evenement": "AvisSupprime",
+      "id_evenement": "EVT-STAT-003",
+      "date_emission": "2026-10-23T09:00:00Z",
+      "service_emetteur": "AvisEtFidelite",
+      "service_recepteur": "StatistiquesFilms",
+      "agregat_modifie": "EvaluationFilm",
+      "id_agregat": "FILM001",
+      "operation": "mise_a_jour",
+      "donnee_modifiee": ["somme_notes", "nombre_avis", "note_moyenne"],
+      "ancienne_valeur": {
+        "id_avis": "AVIS001",
+        "note": 4
+      },
+      "nouvelle_valeur": null
+    }
+  ]
+}
