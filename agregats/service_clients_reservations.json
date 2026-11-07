@@ -39,6 +39,15 @@
       "format": "3D",
       "statut": "programmee"
     },
+    "RecompenseUtilisable": {
+      "type_donnee": "replica",
+      "service_source": "AvisEtFidelite",
+      "id_recompense": "REC001",
+      "id_client": "CLI001",
+      "reduction_euros": 5.00,
+      "date_expiration": "2027-01-19",
+      "statut": "disponible"
+    },
     "Reservation": {
       "id_reservation": "RES001",
       "id_client": "CLI001",
