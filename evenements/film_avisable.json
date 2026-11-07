@@ -3,9 +3,12 @@
   "evenements": [
     {
       "evenement": "FilmPublie",
+      "id_evenement": "EVT-FILM-001",
+      "date_emission": "2026-09-25T08:00:00Z",
       "service_emetteur": "FilmsEtSeances",
       "service_recepteur": "AvisEtFidelite",
       "agregat_modifie": "FilmAvisable",
+      "id_agregat": "FILM001",
       "operation": "creation",
       "donnee_modifiee": "FilmAvisable",
       "nouvelle_valeur": {
@@ -15,7 +18,21 @@
       }
     },
     {
-      "evenement": "FilmModifie",
+      "evenement": "FilmRenomme",
+      "id_evenement": "EVT-FILM-002",
+      "date_emission": "2026-10-06T11:00:00Z",
+      "service_emetteur": "FilmsEtSeances",
+      "service_recepteur": "AvisEtFidelite",
+      "agregat_modifie": "FilmAvisable",
+      "id_agregat": "FILM001",
+      "operation": "mise_a_jour",
+      "donnee_modifiee": "titre",
+      "nouvelle_valeur": "Avatar 2 : La Voie de l'eau"
+    },
+    {
+      "evenement": "FilmRetire",
+      "id_evenement": "EVT-FILM-003",
+      "date_emission": "2026-12-01T08:00:00Z",
       "service_emetteur": "FilmsEtSeances",
       "service_recepteur": "AvisEtFidelite",
       "agregat_modifie": "FilmAvisable",
