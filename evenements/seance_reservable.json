@@ -3,9 +3,12 @@
   "evenements": [
     {
       "evenement": "SeancePubliee",
+      "id_evenement": "EVT-SEA-001",
+      "date_emission": "2026-10-01T10:00:00Z",
       "service_emetteur": "FilmsEtSeances",
       "service_recepteur": "ClientsEtReservations",
       "agregat_modifie": "SeanceReservable",
+      "id_agregat": "SEA101",
       "operation": "creation",
       "donnee_modifiee": "SeanceReservable",
       "nouvelle_valeur": {
@@ -28,6 +31,8 @@
     },
     {
       "evenement": "SeanceModifiee",
+      "id_evenement": "EVT-SEA-002",
+      "date_emission": "2026-10-05T09:00:00Z",
       "service_emetteur": "FilmsEtSeances",
       "service_recepteur": "ClientsEtReservations",
       "agregat_modifie": "SeanceReservable",
@@ -38,6 +43,8 @@
     },
     {
       "evenement": "SeanceAnnulee",
+      "id_evenement": "EVT-SEA-003",
+      "date_emission": "2026-10-18T14:00:00Z",
       "service_emetteur": "FilmsEtSeances",
       "service_recepteur": "ClientsEtReservations",
       "agregat_modifie": "SeanceReservable",
@@ -45,6 +52,19 @@
       "operation": "mise_a_jour",
       "donnee_modifiee": "statut",
       "nouvelle_valeur": "annulee"
+    },
+    {
+      "evenement": "FilmRenomme",
+      "id_evenement": "EVT-SEA-004",
+      "date_emission": "2026-10-06T11:00:00Z",
+      "service_emetteur": "FilmsEtSeances",
+      "service_recepteur": "ClientsEtReservations",
+      "agregat_modifie": "SeanceReservable",
+      "id_agregat": "FILM001",
+      "operation": "mise_a_jour",
+      "donnee_modifiee": "film.titre",
+      "nouvelle_valeur": "Avatar 2 : La Voie de l'eau",
+      "remarque": "Met a jour le titre dans toutes les SeanceReservable dont film.id_film = FILM001"
     }
   ]
 }
